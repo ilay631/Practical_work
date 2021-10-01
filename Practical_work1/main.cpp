@@ -11,7 +11,11 @@ int main() {
 		// findPoint();
 
 		// e2
-		findMinHeight();
+		//findMinHeight();
+
+		// e4
+		DaysYourLive();
+
 	}
 	return 0;
 }
