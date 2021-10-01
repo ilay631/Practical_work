@@ -20,7 +20,7 @@ struct DayPerMonth {
 };
 
 
-void DaysYourLive() {
+void daysYourLive() {
 	using namespace std;
 	int day, month, year;
 	cout << "Input your birthday";

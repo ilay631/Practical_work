@@ -11,14 +11,16 @@ int main() {
 		// findPoint();
 
 		// e2
-		//findMinHeight();
+		// findMinHeight();
 
 		// e4
-		//DaysYourLive();
+		// daysYourLive();
 
 		// m1
-		isFibonacci();
+		// isFibonacci();
 
+		// m2
+		numberSumOfPrimes();
 	}
 	return 0;
 }
