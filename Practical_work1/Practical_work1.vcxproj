@@ -143,6 +143,7 @@
     <ClCompile Include="e2.cpp" />
     <ClCompile Include="e3.cpp" />
     <ClCompile Include="e4.cpp" />
+    <ClCompile Include="m1.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

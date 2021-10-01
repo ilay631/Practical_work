@@ -14,7 +14,10 @@ int main() {
 		//findMinHeight();
 
 		// e4
-		DaysYourLive();
+		//DaysYourLive();
+
+		// m1
+		isFibonacci();
 
 	}
 	return 0;
