@@ -7,7 +7,11 @@ int main() {
 	std::cout << "Input number of tests ";
 	std::cin >> N;
 	for (int i = 0; i < N; i++) {
-		findPoint();
+		// e1
+		// findPoint();
+
+		// e2
+		findMinHeight();
 	}
 	return 0;
 }
