@@ -1,8 +1,8 @@
 #include <iostream>
-#include <e1.cpp>
+#include "header.h"
 
 
 int main() {
-	
+	findPoint();
 	return 0;
 }

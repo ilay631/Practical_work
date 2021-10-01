@@ -10,8 +10,6 @@ void findPoint() {
 		std::cout << "Input coord of second point ";
 		std::cin >> x2 >> y2;
 
-		std::cout << "Coord point 90 degree of : " << -(y2 - y1) << " ; " << (x2 - x1) << std::endl;
+		std::cout << "Coord point 90 degree of: (" << -(y2 - y1) + x1 << "; " << (x2 - x1) + y1 << ")\n";
 	}
-
-
 }
