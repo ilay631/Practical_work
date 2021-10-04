@@ -4,29 +4,39 @@
 */
 
 #include <iostream>
-#include <ctime>
-
-struct DayPerMonth {
-	int january = 31;
-	int february = 28;
-	int march = 31;
-	int april = 30;
-	int may = 31;
-	int june = 30;
-	int july = 31;
-	int august = 30;
-	int september = 31;
-	int october = 30;
-};
+#include <Windows.h>
 
 
 void daysYourLive() {
 	using namespace std;
-	int day, month, year;
-	cout << "Input your birthday";
-	cin >> day >> month >> year;
+	SYSTEMTIME st;
+	GetLocalTime(&st);
+	int curDay = st.wDay;
+	int curMonth = st.wMonth;
+	int curYear = st.wYear;
 
-	
-	
+	int bday, bmonth, byear;
+	int month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	cout << "Input your birthday" << endl;
+	cin >> bday >> bmonth >> byear;
+
+
+	int livedDays = month[curMonth - 1] - bday;
+	for (int i = bmonth - 1; i < 12; i++) {
+		livedDays += month[i];
+	}
+	for (int i = byear; i < curYear - 1; i++) {
+		if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
+			livedDays += 366;
+		else
+			livedDays += 365;
+	}
+	for (int i = 0; i < curMonth - 2; i++) {
+		livedDays += month[i];
+	}
+
+	livedDays += curDay;
+
+	cout << livedDays << endl;
 
 }
