@@ -27,14 +27,9 @@ void numberSumOfPrimes() {
 	cout << "Введите количество простых чисел ";
 	cin >> N;
 
-	for (int i = 2; i < num; i++) {
-		if (isSimple(i))
-			cout << i << " ";
-	}
-
-	if (N > num / 2)
-		cout << "Нет" << endl;
-	else
+	if (N <= num / 2 && (isSimple(num) || N > 2))
 		cout << "Да" << endl;
+	else
+		cout << "Нет" << endl;
 
 }
