@@ -14,13 +14,13 @@ int main() {
 		// findMinHeight();
 
 		// e4
-		// daysYourLive();
+		daysYourLive();
 
 		// m1
 		// isFibonacci();
 
 		// m2
-		numberSumOfPrimes();
+		// numberSumOfPrimes();
 	}
 	return 0;
 }

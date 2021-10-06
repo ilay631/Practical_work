@@ -7,6 +7,15 @@
 #include <Windows.h>
 
 
+bool isLeapYear(int year) {
+	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+		return true;
+	else
+		return false;
+}
+
+
+
 void daysYourLive() {
 	using namespace std;
 	SYSTEMTIME st;
@@ -15,28 +24,53 @@ void daysYourLive() {
 	int curMonth = st.wMonth;
 	int curYear = st.wYear;
 
-	int bday, bmonth, byear;
+	int bDay, bMonth, bYear;
 	int month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	cout << "Input your birthday" << endl;
-	cin >> bday >> bmonth >> byear;
+	cin >> bDay >> bMonth >> bYear;
+	// ѕроверка на дурака
+	if (bYear > curYear || (bYear == curYear && bMonth > curMonth) || (bYear == curYear && bMonth == curMonth && bDay > curDay))
+		cout << "Error, date is incorrect!" << endl;
+	else {
+		int livedDays = 0;
 
+		if (bYear == curYear) {
+			if (bMonth == curMonth) { // один и тот же год, один и тот же мес€ц
+				livedDays += curDay - bDay;
+			}
+			else { // один и тот же год, разные мес€ца
+				livedDays += month[bMonth - 1] - bDay;
+				for (int i = bMonth; i < curMonth - 1; i++) {
+					livedDays += month[i];
+					if (i == 1 && isLeapYear(bYear)) // ”чли високосный ферваль
+						livedDays++;
+				}
+				livedDays += curDay;
+			}
+		}
+		else { // разные года
+			livedDays += month[bMonth - 1] - bDay;
+			for (int i = bMonth; i < 12; i++) {
+				livedDays += month[i];
+				if (i == 1 && isLeapYear(bYear)) // ”чли високосный ферваль
+					livedDays++;
+			}
 
-	int livedDays = month[curMonth - 1] - bday;
-	for (int i = bmonth - 1; i < 12; i++) {
-		livedDays += month[i];
+			for (int i = bYear + 1; i < curYear; i++) {
+				livedDays += 365;
+				if (isLeapYear(i))
+					livedDays++;
+			}
+
+			for (int i = 0; i < curMonth - 1; i++) {
+				livedDays += month[i];
+				if (i == 1 && isLeapYear(curYear)) // ”чли високосный ферваль
+					livedDays++;
+			}
+
+			livedDays += curDay;
+		}
+
+		cout << "You already living on this planet " << livedDays <<  " days!" << endl;
 	}
-	for (int i = byear; i < curYear - 1; i++) {
-		if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
-			livedDays += 366;
-		else
-			livedDays += 365;
-	}
-	for (int i = 0; i < curMonth - 2; i++) {
-		livedDays += month[i];
-	}
-
-	livedDays += curDay;
-
-	cout << livedDays << endl;
-
 }
