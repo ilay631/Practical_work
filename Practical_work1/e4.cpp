@@ -15,24 +15,33 @@ void daysYourLive() {
 	int curMonth = st.wMonth;
 	int curYear = st.wYear;
 
-	int bday, bmonth, byear;
+	int bDay, bMonth, bYear;
 	int month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	cout << "Input your birthday" << endl;
-	cin >> bday >> bmonth >> byear;
+	cin >> bDay >> bMonth >> bYear;
 
+	int livedDays = 0;
 
-	int livedDays = month[curMonth - 1] - bday;
-	for (int i = bmonth - 1; i < 12; i++) {
-		livedDays += month[i];
+	if (bYear != curYear || bMonth != curMonth) {
+		livedDays += month[bMonth - 1] - bDay + 1;
 	}
-	for (int i = byear; i < curYear - 1; i++) {
+
+	if (bYear != curYear) {
+		for (int i = bMonth; i < 12; i++) {
+			livedDays += month[i];
+		}
+	}
+
+	for (int i = bYear + 1; i < curYear; i++) {
+		livedDays += 365;
 		if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
-			livedDays += 366;
-		else
-			livedDays += 365;
+			livedDays++;
 	}
-	for (int i = 0; i < curMonth - 2; i++) {
-		livedDays += month[i];
+
+	if (bMonth + 1 < curMonth) {
+		for (int i = 0; i < curMonth - 1; i++) {
+			livedDays += month[i];
+		}
 	}
 
 	livedDays += curDay;
