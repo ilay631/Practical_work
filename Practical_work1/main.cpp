@@ -47,14 +47,29 @@ void task_2() {
 
 
 
+void task_3(int n, int m) {
+	int** arr = new int* [n];
+	for (int i = 0; i < n; i++)
+		arr[i] = new int[m];
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			arr[i][j] = rand() % 100 + 1;
+			std::cout << arr[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+
+}
+
+
+
 int main() {
-	// Task 1
-	//task_1();
+	// task_1();
 
-	// Task 2
-	task_2();
+	// task_2();
 
-
+	task_3(10, 10);
 
 	return 0;
 }
