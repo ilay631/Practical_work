@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 
 
 void task_1() {
@@ -12,6 +12,7 @@ void task_1() {
 
 
 
+// TODO
 void task_2() {
 	using namespace std;
 
@@ -64,12 +65,31 @@ void task_3(int n, int m) {
 
 
 
+void task_4() {
+	int length;
+	std::cin >> length;
+	char* arr = new char[length];
+	for (int i = 0; i < length; i++) {
+		arr[i] = char (rand() % 128);
+		std::cout << arr[i] << " ";
+	}
+	std::cout << "\n";
+
+	for (int i = 0; i < length; i++) {
+		std::cout << (void*) &arr[i] << "\n";
+	}
+}
+
+
+
 int main() {
 	// task_1();
 
 	// task_2();
 
 	task_3(10, 10);
+
+	// task_4();
 
 	return 0;
 }
