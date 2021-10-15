@@ -103,6 +103,35 @@ int binarySearch(int elem, int arr[], int left, int right) {
 
 
 
+void GaussianTransformation(float (*arr)[3], int length, int width) {
+	for (int i = 0; i < length; i++) {
+		for (int j = i + 1; j < length; j++) {
+			float mult = arr[j][i] / arr[i][i];
+			for (int k = 0; k < width; k++) {
+				arr[j][k] -= mult * arr[i][k];
+			}
+		}
+	}
+
+	for (int i = length - 1; i >= 0; i--) {
+		for (int j = i - 1; j >= 0; j--) {
+			float mult = arr[j][i] / arr[i][i];
+			for (int k = 0; k < width; k++) {
+				arr[j][k] -= mult * arr[i][k];
+			}
+		}
+	}
+
+	for (int i = 0; i < length; i++) {
+		for (int j = 0; j < width; j++)
+			cout << arr[i][j] << " ";
+		cout << endl;
+	}
+
+}
+
+
+
 int main() {
 	setlocale(LC_ALL, "Russian");
 
@@ -127,6 +156,6 @@ int main() {
 	int elem;
 	cin >> elem;
 	cout << "Index = " << binarySearch(elem, arr, 0, n) << " Elem = " << arr[binarySearch(elem, arr, 0, n)] << endl;
-	cout << "LOL";
+
 	return 0;
 }
