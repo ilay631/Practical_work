@@ -2,6 +2,14 @@
 #include <string>
 
 
+void outputMas(int* mas, int length) {
+	for (int i = 0; i < length; i++) {
+		std::cout << mas[i] << " ";
+	}
+	std::cout << "\n";
+}
+
+
 void task_1() {
 	int arr[6]{ 1, 2, 3, 4, 5, 6 };
 	int k = 0;
@@ -82,14 +90,38 @@ void task_4() {
 
 
 
+void task_5() {
+	int length;
+	std::cout << "Input massive length\n";
+	std::cin >> length;
+	int* mas = new int[length];
+	for (int i = 0; i < length; i++)
+		mas[i] = rand() % 200 - 100;
+
+	std::cout << "Original massive\n";
+	outputMas(mas, length);
+
+	std::cout << "Reverse massive\n";
+	int* ind = mas + length - 1;
+	for (int i = 0; i < length; i++) {
+		std::cout << *ind << " ";
+		ind--;
+	}
+
+}
+
+
+
 int main() {
 	// task_1();
 
 	// task_2();
 
-	task_3(10, 10);
+	// task_3(10, 10);
 
 	// task_4();
+
+	task_5();
 
 	return 0;
 }
