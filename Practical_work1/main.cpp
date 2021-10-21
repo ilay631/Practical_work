@@ -119,6 +119,48 @@ int task_6(void* p1, void* p2) {
 }
 
 
+// Task 7
+int** createUpperTriangularMatrix(int n) {
+	int** matrix = new int* [n];
+	for (int i = 0; i < n; i++) {
+		matrix[i] = new int [n - i];
+	}
+
+	return matrix;
+}
+
+
+void fillMatrix(int** mat, int n) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n - i; j++) {
+			mat[i][j] = rand() % 200 - 100;
+		}
+	}
+}
+
+
+void outputMatrix(int** mat, int n) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (j < i)
+				std::cout << 0 << " ";
+			else
+				std::cout << mat[i][j - i] << " ";
+		}
+		std::cout << "\n";
+	}
+}
+
+
+const int* findRefInMatrix(int** mas, int line, int col) {
+	static const int zero = 0;
+	if (col < line)
+		return &zero;
+	else
+		return &mas[line][col - line];
+}
+
+
 
 int main() {
 	// task_1();
@@ -136,6 +178,14 @@ int main() {
 	int* p1 = &x;
 	int* p2 = &x;
 	std::cout << task_6(p1, p2);
+	*/
+
+	// Task 7
+	/*
+	int** mat = createUpperTriangularMatrix(5);
+	fillMatrix(mat, 5);
+	outputMatrix(mat, 5);
+	std::cout << &mat[0][2] << "\n" << findRefInMatrix(mat, 0, 2);
 	*/
 
 	return 0;
