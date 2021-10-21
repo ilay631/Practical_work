@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 
 void outputMas(int* mas, int length) {
@@ -19,8 +18,6 @@ void task_1() {
 }
 
 
-
-// TODO
 void task_2() {
 	using namespace std;
 
@@ -35,7 +32,7 @@ void task_2() {
 	int arr[5]{ 1, 2, 3, 4, 5 };
 
 	cout << &var1 << "\n";
-	cout << &var2 << "\n";
+	cout << (void*) &var2 << "\n";
 	cout << &var3 << "\n";
 	cout << &var4 << "\n";
 	cout << &var5 << "\n";
@@ -55,7 +52,6 @@ void task_2() {
 }
 
 
-
 void task_3(int n, int m) {
 	int** arr = new int* [n];
 	for (int i = 0; i < n; i++)
@@ -72,7 +68,6 @@ void task_3(int n, int m) {
 }
 
 
-
 void task_4() {
 	int length;
 	std::cin >> length;
@@ -87,7 +82,6 @@ void task_4() {
 		std::cout << (void*) &arr[i] << "\n";
 	}
 }
-
 
 
 void task_5() {
@@ -177,8 +171,33 @@ void mySwap(int& a, int& b) {
 }
 
 
-void quickSort(int* mas, int length) {
+void quickSortRecursive(int* mas, int length) {
+	int i = 0;
+	int j = length - 1;
+	int mid = mas[length / 2];
 
+	do {
+		while (mas[i] < mid) {
+			i++;
+		}
+		while (mas[j] > mid) {
+			j--;
+		}
+
+		if (i <= j) {
+			mySwap(mas[i], mas[j]);
+
+			i++;
+			j--;
+		}
+	} while (i <= j);
+
+	if (j > 0) {
+		quickSortRecursive(mas, j + 1);
+	}
+	if (i < length) {
+		quickSortRecursive(&mas[i], length - i);
+	}
 }
 
 
@@ -189,7 +208,6 @@ bool normalComprassion(int a, int b) {
 	else
 		return false;
 }
-
 
 
 void insertSort(int* mas, int length, bool (*func)(int, int)) {
@@ -203,7 +221,6 @@ void insertSort(int* mas, int length, bool (*func)(int, int)) {
 		}
 	}
 }
-
 
 
 int main() {
@@ -235,7 +252,19 @@ int main() {
 
 	// std::cout << task_8();
 
+	// Task 9
+	/*
+	int* mas = new int[10];
+	for (int i = 0; i < 10; i++) {
+		mas[i] = rand() % 200 - 100;
+	}
+	outputMas(mas, 10);
+	quickSortRecursive(mas, 10);
+	outputMas(mas, 10);
+	*/
+
 	// Task 10
+	/*
 	int* mas = new int[10];
 	for (int i = 0; i < 10; i++) {
 		mas[i] = rand() % 200 - 100;
@@ -243,5 +272,7 @@ int main() {
 	outputMas(mas, 10);
 	insertSort(mas, 10, &normalComprassion);
 	outputMas(mas, 10);
+	*/
+
 	return 0;
 }
