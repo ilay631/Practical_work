@@ -111,6 +111,14 @@ void task_5() {
 }
 
 
+int task_6(void* p1, void* p2) {
+	if (p1 == p2)
+		return 1;
+	else
+		return 0;
+}
+
+
 
 int main() {
 	// task_1();
@@ -121,7 +129,14 @@ int main() {
 
 	// task_4();
 
-	task_5();
+	// task_5();
+
+	/*
+	int x = 10;
+	int* p1 = &x;
+	int* p2 = &x;
+	std::cout << task_6(p1, p2);
+	*/
 
 	return 0;
 }
