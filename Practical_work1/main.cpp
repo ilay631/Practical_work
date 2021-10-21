@@ -161,6 +161,50 @@ const int* findRefInMatrix(int** mas, int line, int col) {
 }
 
 
+int* task_8() {
+	static int variable;
+	std::cout << "Variable created with type int. \n";
+	int* p = &variable;
+	return p;
+}
+
+
+// Task 9
+void mySwap(int& a, int& b) {
+	a = a + b;
+	b = a - b;
+	a = a - b;
+}
+
+
+void quickSort(int* mas, int length) {
+
+}
+
+
+// Task 10
+bool normalComprassion(int a, int b) {
+	if (a > b)
+		return true;
+	else
+		return false;
+}
+
+
+
+void insertSort(int* mas, int length, bool (*func)(int, int)) {
+	for (int i = 0; i < length; i++) {
+		for (int j = i + 1; j < length; j++) {
+			if (func(mas[i], mas[j])) {
+				int t = mas[i];
+				mas[i] = mas[j];
+				mas[j] = t;
+			}
+		}
+	}
+}
+
+
 
 int main() {
 	// task_1();
@@ -173,6 +217,7 @@ int main() {
 
 	// task_5();
 
+	// Task 6
 	/*
 	int x = 10;
 	int* p1 = &x;
@@ -188,5 +233,15 @@ int main() {
 	std::cout << &mat[0][2] << "\n" << findRefInMatrix(mat, 0, 2);
 	*/
 
+	// std::cout << task_8();
+
+	// Task 10
+	int* mas = new int[10];
+	for (int i = 0; i < 10; i++) {
+		mas[i] = rand() % 200 - 100;
+	}
+	outputMas(mas, 10);
+	insertSort(mas, 10, &normalComprassion);
+	outputMas(mas, 10);
 	return 0;
 }
