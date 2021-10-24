@@ -103,7 +103,7 @@ int binarySearch(int elem, int arr[], int left, int right) {
 
 
 
-void GaussianTransformation(float (*arr)[3], int length, int width) {
+void gaussianTransformation(float (*arr)[3], int length, int width) {
 	for (int i = 0; i < length; i++) {
 		for (int j = i + 1; j < length; j++) {
 			float mult = arr[j][i] / arr[i][i];
@@ -134,14 +134,15 @@ void GaussianTransformation(float (*arr)[3], int length, int width) {
 
 int main() {
 	setlocale(LC_ALL, "Russian");
-
+	/*
+	// Task 1
 	const int n = 6;
 	int arr[n];
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
 
 	outputArr(arr, n);
-	/*
+
 	bubbleSort(arr, n);
 
 	outputArr(arr, n);
@@ -153,9 +154,30 @@ int main() {
 	cout << "Мода = " << moda(arr, n) << endl;
 	cout << "Дисперсия = " << dispersion(arr, n) << endl;
 	*/
+	
+	/*
+	// Task 2
+	const int n = 6;
+	int arr[n];
+	for (int i = 0; i < n; i++)
+		cin >> arr[i];
+
+	outputArr(arr, n);
+
 	int elem;
 	cin >> elem;
 	cout << "Index = " << binarySearch(elem, arr, 0, n) << " Elem = " << arr[binarySearch(elem, arr, 0, n)] << endl;
+	*/
+
+	// Task 3
+	float mas[3][3];
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++)
+			cin >> mas[i][j];
+		cout << endl;
+	}
+
+	gaussianTransformation(mas, 3, 3);
 
 	return 0;
 }
