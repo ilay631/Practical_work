@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Task 1
+// Task 1.
 int sumOfDigits(int num) {
 	int s = 0;
 	while (num > 0) {
@@ -31,8 +31,23 @@ void task_1() {
 }
 
 
+// Task 2.
+void task_2() {
+	int n;
+	cout << "Input number n\n";
+	cin >> n;
+	int m = 0;
+	for (int i = 0; i <= pow(n, 1.0 / 3); i++) {
+		if (n % (int)(pow(3, i)) == 0)
+			m = i;
+	}
+	cout << m << endl;
+}
+
+
 int main() {
-	task_1();
+	// task_1();
+	task_2();
 
 	return 0;
 }
