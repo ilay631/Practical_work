@@ -16,7 +16,7 @@ int sumOfDigits(int num) {
 
 void task_1() {
 	int a, b;
-	cout << "Input borders\n";
+	cout << "Input range\n";
 	cin >> a >> b;
 	for (int i = a; i <= b; i++) {
 		int sum = sumOfDigits(i);
@@ -110,12 +110,49 @@ void task_4() {
 }
 
 
+// Task 5
+bool isSimple(int num) {
+	for (int i = 2; i <= sqrt(num); i++) {
+		if (num % i == 0)
+			return false;
+	}
+	return true;
+}
+
+
+void task_5() {
+	int a, b;
+	cout << "Input range" << endl;
+	cin >> a >> b;
+
+	int cnt = 0;
+	for (int i = a; i <= b; i++) {
+		bool fl = true;
+		int num = i;
+		while (num > 0) {
+			if (!isSimple(num)) {
+				fl = false;
+				break;
+			}
+			num /= 10;
+		}
+		if (fl) {
+			cout << i << endl;
+			cnt++;
+		}
+	}
+
+	cout << cnt << endl;
+}
+
+
 
 int main() {
 	// task_1();
 	// task_2();
 	// task_3();
-	task_4();
+	// task_4();
+	task_5();
 
 	return 0;
 }
