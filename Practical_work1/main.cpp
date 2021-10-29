@@ -1,5 +1,7 @@
 #include <iostream>
+#include <string>
 using namespace std;
+
 
 // Task 1.
 int sumOfDigits(int num) {
@@ -45,9 +47,43 @@ void task_2() {
 }
 
 
+// Task 3
+string convertFullName(string fullName) {
+	string name("");
+	string surname(""); 
+	string patronymic("");
+	int k = 0;
+	for (int i = 0; i < fullName.size(); i++) {
+		if (fullName[i] == ' ') {
+			k++;
+			continue;
+		}
+
+		if (k == 0)
+			name += fullName[i];
+		else if (k == 1)
+			patronymic += fullName[i];
+		else
+			surname += fullName[i];
+	}
+
+	return surname + " " + name[0] + "." + patronymic[0] + ".";
+}
+
+
+void task_3() {
+	string fullName;
+	cout << "Input your full name" << endl;
+	getline(cin, fullName);
+	cout << convertFullName(fullName) << endl;
+}
+
+
+
 int main() {
 	// task_1();
-	task_2();
-
+	// task_2();
+	task_3();
+	
 	return 0;
 }
