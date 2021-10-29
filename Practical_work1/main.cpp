@@ -79,11 +79,43 @@ void task_3() {
 }
 
 
+// Task 4
+void task_4() {
+	string alphabet;
+	cout << "Input tumba-umba alphabet" << endl;
+	cin >> alphabet;
+
+	string* oldWords = new string[alphabet.size()];
+	for (int i = 0; i < alphabet.size(); i++) {
+		oldWords[i] = alphabet[i];
+	}
+
+	for (int i = 1; i < alphabet.size(); i++) {
+		string* newWords = new string[pow(alphabet.size(), i + 1)];
+
+		for (int j = 0; j < pow(alphabet.size(), i); j++) {
+
+			for (int k = 0; k < alphabet.size(); k++) {
+				newWords[j * alphabet.size() + k] = oldWords[j] + alphabet[k];
+			}
+		}
+		oldWords = newWords;
+	}
+
+
+	int wordsNumber = pow(alphabet.size(), alphabet.size());
+	for (int i = 0; i < wordsNumber; i++)
+		cout << oldWords[i] << endl;
+	cout << wordsNumber << endl;
+}
+
+
 
 int main() {
 	// task_1();
 	// task_2();
-	task_3();
-	
+	// task_3();
+	task_4();
+
 	return 0;
 }
