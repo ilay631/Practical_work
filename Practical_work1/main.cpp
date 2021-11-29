@@ -34,8 +34,35 @@ void task_1() {
 }
 
 
+void sortThreeVariables(int* p1, int* p2, int* p3) {
+	int a = *p1;
+	int b = *p2;
+	int c = *p3;
+	*p1 = max(max(a, b), c);
+	*p3 = min(min(a, b), c);
+	int sr = a + b + c - *p1 - *p3;
+	*p2 = sr;
+}
+
+
+void task_2() {
+	int a, b, c;
+	cout << "Input three variables" << endl;
+	cin >> a >> b >> c;
+
+	int* p_a = &a;
+	int* p_b = &b;
+	int* p_c = &c;
+
+	sortThreeVariables(p_a, p_b, p_c);
+
+	cout << a << " " << b << " " << c << endl;
+}
+
+
 int main() {
-	task_1();
+	// task_1();
+	task_2();
 
 	return 0;
 }
