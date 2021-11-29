@@ -60,9 +60,29 @@ void task_2() {
 }
 
 
+void rearrangeBytesInCircle(int* num) {
+	int last_b = *num % 256;
+	*num >>= 24;
+	*num += last_b * 256 * 256 * 256;
+}
+
+
+void task_3() {
+	int num(0);
+	int* p_num = &num;
+	cout << "Input int number" << endl;
+	cin >> *p_num;
+
+	rearrangeBytesInCircle(p_num);
+
+	cout << *p_num << endl;
+}
+
+
 int main() {
 	// task_1();
-	task_2();
+	// task_2();
+	task_3();
 
 	return 0;
 }
