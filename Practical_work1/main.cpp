@@ -79,10 +79,40 @@ void task_3() {
 }
 
 
+void aliveFunction(int N) {
+	static int n = -10;
+	if (n == -10) {
+		n = N;
+		cout << "Hello world! I was born!!!" << endl;
+	}
+	else if (n > 0) {
+		n--;
+		cout << "I'm alive" << endl;
+	}
+	else if (n == 0) {
+		cout << "Bye, bye, dear, I'm already asleep..." << endl;
+	}
+}
+
+
+void task_4() {
+	int n, m;
+	cout << "Input life number of function" << endl;
+	cin >> m;
+	cout << "Input number of calls" << endl;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		aliveFunction(m);
+	}
+}
+
+
+
 int main() {
 	// task_1();
 	// task_2();
-	task_3();
+	// task_3();
+	task_4();
 
 	return 0;
 }
