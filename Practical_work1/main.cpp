@@ -111,16 +111,23 @@ SinglyLinkedList createList() {
 }
 
 
+void changeList(SinglyLinkedList* list) {
+	Node* p = list->startPtr;
+	while (p) {
+		if (p->value % 2 == 0)
+			p->value /= 2;
+		else
+			p->value = p->value * 3 - 1;
+		p = p->next;
+	}
+}
+
+
 int main() {
 	SinglyLinkedList list = createList();
 
 	list.print();
-	list.append(100);
-	list.print();
-	cout << list.get(1)->value;
-	cout << list.find(5);
-	cout << endl;
-	list.remove(5);
+	changeList(&list);
 	list.print();
 
 	return 0;
