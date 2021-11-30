@@ -87,6 +87,19 @@ struct SinglyLinkedList {
 			p->next = p1;
 		}
 	}
+
+	int getLength() {
+		Node* p = startPtr;
+		if (isEmpty())
+			return 0;
+		int k = 1;
+		while (p->next != nullptr) {
+			p = p->next;
+			k++;
+		}
+
+		return k;
+	}
 };
 
 
@@ -96,12 +109,11 @@ SinglyLinkedList createList() {
 	int length;
 	cin >> length;
 	if (length > 0) {
-		cout << "Input 1 element" << endl;
+		cout << "Input elements" << endl;
 		int n;
 		cin >> n;
 		list.append(n);
 		for (int i = 1; i < length; i++) {
-			cout << "Input " << i + 1 << " element" << endl;
 			cin >> n;
 			list.append(n);
 		}
@@ -125,7 +137,7 @@ void changeList(SinglyLinkedList* list) {
 
 void reverseList(SinglyLinkedList* list) {
 	Node* curNode = list->startPtr;
-	if (!curNode)
+	if (list->isEmpty())
 		return;
 	Node* nextNode = curNode->next;
 	curNode->next = nullptr;
@@ -148,12 +160,35 @@ void reverseList(SinglyLinkedList* list) {
 }
 
 
+bool canSortedIfTwoElementsRemoved(SinglyLinkedList* list) {
+	int increases(0);
+	int decreases(0);
+	int length = list->getLength();
+	if (length < 2) {
+		return true;
+	}
+	else {
+		Node* p = list->startPtr;
+		while (p && p->next) {
+			if (p->value >= p->next->value)
+				increases++;
+			if (p->value <= p->next->value)
+				decreases++;
+			p = p->next;
+		}
+
+		if (length - increases <= 2 || length - decreases <= 2)
+			return true;
+		else return false;
+	}
+}
+
+
 int main() {
 	SinglyLinkedList list = createList();
 
 	list.print();
-	reverseList(&list);
-	list.print();
+	cout << canSortedIfTwoElementsRemoved(&list);
 
 	return 0;
 }
