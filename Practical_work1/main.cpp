@@ -91,20 +91,20 @@ struct SinglyLinkedList {
 
 
 SinglyLinkedList createList() {
+	SinglyLinkedList list = SinglyLinkedList{};
 	cout << "Input number of elements" << endl;
 	int length;
 	cin >> length;
-	cout << "Input 1 element" << endl;
-	int n;
-	cin >> n;
-	Node* curNode = new Node(n);
-	SinglyLinkedList list = SinglyLinkedList{ curNode };
-	for (int i = 1; i < length; i++) {
-		cout << "Input " << i + 1 << " element" << endl;
+	if (length > 0) {
+		cout << "Input 1 element" << endl;
+		int n;
 		cin >> n;
-		Node* newNode = new Node(n);
-		curNode->next = newNode;
-		curNode = newNode;
+		list.append(n);
+		for (int i = 1; i < length; i++) {
+			cout << "Input " << i + 1 << " element" << endl;
+			cin >> n;
+			list.append(n);
+		}
 	}
 
 	return list;
@@ -123,11 +123,36 @@ void changeList(SinglyLinkedList* list) {
 }
 
 
+void reverseList(SinglyLinkedList* list) {
+	Node* curNode = list->startPtr;
+	if (!curNode)
+		return;
+	Node* nextNode = curNode->next;
+	curNode->next = nullptr;
+	while (nextNode) {
+		if (nextNode->next) {
+			Node* t = nextNode->next;
+			nextNode->next = curNode;
+			curNode = nextNode;
+			nextNode = t;
+		}
+		else {
+			nextNode->next = curNode;
+			list->startPtr = nextNode;
+			curNode = nextNode;
+			nextNode = nullptr;
+		}
+
+	}
+
+}
+
+
 int main() {
 	SinglyLinkedList list = createList();
 
 	list.print();
-	changeList(&list);
+	reverseList(&list);
 	list.print();
 
 	return 0;
