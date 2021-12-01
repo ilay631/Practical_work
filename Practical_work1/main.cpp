@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 
@@ -7,6 +8,8 @@ struct Node {
 	Node* next;
 
 	Node(int _val) : value(_val), next(nullptr) {}
+
+	Node(int _val, Node* p) : value(_val), next(p) {}
 };
 
 
@@ -184,11 +187,157 @@ bool canSortedIfTwoElementsRemoved(SinglyLinkedList* list) {
 }
 
 
+struct Stack {
+	Node* startPtr;
+
+	Stack() : startPtr(nullptr) {}
+
+	Stack(Node* p) : startPtr(p) {}
+
+	bool isEmpty() {
+		return startPtr == nullptr;
+	}
+
+	Node* add(int _val) {
+		Node new_ = Node(_val, startPtr);
+		startPtr = &new_;
+	}
+
+	Node* get() {
+		Node* t = startPtr;
+		startPtr = startPtr->next;
+		return t;
+	}
+
+	void print() {
+		Node* p = startPtr;
+		while (p != nullptr) {
+			cout << p->value << " ";
+			p = p->next;
+		}
+		cout << endl;
+	}
+
+	int getLength() {
+		Node* p = startPtr;
+		if (isEmpty())
+			return 0;
+		int k = 1;
+		while (p->next != nullptr) {
+			p = p->next;
+			k++;
+		}
+
+		return k;
+	}
+};
+
+
+struct DoubleNode {
+	int value;
+	DoubleNode* next;
+	DoubleNode* prev;
+
+	DoubleNode(int _val) : value(_val), next(nullptr), prev(nullptr) {}
+
+	DoubleNode(int _val, DoubleNode* _next, DoubleNode* _prev) : value(_val), next(_next), prev(_prev) {}
+};
+
+
+struct DoubleLinkedList {
+	DoubleNode* start;
+	DoubleNode* end;
+
+	DoubleLinkedList() : start(nullptr), end(nullptr) {}
+
+	DoubleLinkedList(DoubleNode* ptr) : start(ptr), end(ptr) {}
+
+	bool isEmpty() {
+		return start == nullptr;
+	}
+
+	void append(int _val) {
+		DoubleNode* p = new DoubleNode(_val, nullptr, end);
+		if (isEmpty()) {
+			start = p;
+			end = p;
+		}
+		else {
+			end->next = p;
+			end = p;
+		}
+	}
+
+	void print() {
+		DoubleNode* p = start;
+		while (p != nullptr) {
+			cout << p->value << " ";
+			p = p->next;
+		}
+		cout << endl;
+	}
+
+	void remove(int _val) {
+		if (isEmpty())
+			return;
+		DoubleNode* p = start;
+		if (p->value == _val) {
+			start = p->next;
+			delete p;
+			return;
+		}
+		while (p && p->next && p->next->value != _val) {
+			p = p->next;
+		}
+		if (p->next == nullptr)
+			return;
+		else {
+			DoubleNode* p1 = p->next->next;
+			delete p->next;
+			p->next = p1;
+		}
+	}
+
+	DoubleNode* get(int ind) {
+		DoubleNode* p = start;
+		for (int i = 0; i < ind; i++) {
+			p = p->next;
+			if (p == nullptr)
+				return p;
+		}
+		return p;
+	}
+};
+
+
+DoubleLinkedList createDoubleList() {
+	DoubleLinkedList list = DoubleLinkedList{};
+	cout << "Input number of elements" << endl;
+	int length;
+	cin >> length;
+	if (length > 0) {
+		cout << "Input elements" << endl;
+		int n;
+		cin >> n;
+		list.append(n);
+		for (int i = 1; i < length; i++) {
+			cin >> n;
+			list.append(n);
+		}
+	}
+
+	return list;
+}
+
+
 int main() {
-	SinglyLinkedList list = createList();
+	DoubleLinkedList list = createDoubleList();
 
 	list.print();
-	cout << canSortedIfTwoElementsRemoved(&list);
+	list.append(1000);
+	list.print();
+	list.remove(1000);
+	list.print();
 
 	return 0;
 }
