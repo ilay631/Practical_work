@@ -330,14 +330,26 @@ DoubleLinkedList createDoubleList() {
 }
 
 
+bool isSimmetrical(DoubleLinkedList* list) {
+	if (list->start == list->end)
+		return true;
+	DoubleNode* left = list->start;
+	DoubleNode* right = list->end;
+	while (left != right && right->next != left) {
+		if (left->value != right->value)
+			return false;
+		left = left->next;
+		right = right->prev;
+	}
+	return true;
+}
+
+
 int main() {
 	DoubleLinkedList list = createDoubleList();
 
 	list.print();
-	list.append(1000);
-	list.print();
-	list.remove(1000);
-	list.print();
+	cout << isSimmetrical(&list);
 
 	return 0;
 }
