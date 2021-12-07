@@ -98,6 +98,24 @@ struct TreeNode {
 
 		return max(left->height(), right->height()) + 1;
 	}
+
+	void NLR() { // Прямой
+		cout << value << " ";
+		left->NLR();
+		right->NLR();
+	}
+
+	void LNR() { // Поперечный
+		left->NLR();
+		cout << value << " ";
+		right->NLR();
+	}
+
+	void LRN() { // Обратный
+		left->NLR();
+		right->NLR();
+		cout << value << " ";
+	}
 };
 
 
@@ -139,6 +157,18 @@ struct BinaryTree {
 		if (isEmpty())
 			return 0;
 		else return root->height();
+	}
+
+	void NLR() { // Прямой
+		root->NLR();
+	}
+
+	void LNR() { // Поперечный
+		root->LNR();
+	}
+
+	void LRN() { // Обратный
+		root->LRN();
 	}
 };
 
