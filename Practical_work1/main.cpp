@@ -85,6 +85,19 @@ struct TreeNode {
 		}
 		return false;
 	}
+
+	int height() {
+		if (left == nullptr && right == nullptr)
+			return 1;
+		
+		if (left == nullptr || right == nullptr) {
+			if (left)
+				return left->height() + 1;
+			else return right->height() + 1;
+		}
+
+		return max(left->height(), right->height()) + 1;
+	}
 };
 
 
@@ -116,7 +129,16 @@ struct BinaryTree {
 	}
 
 	bool remove(int _value) {
-		return !isEmpty() && root->remove(_value, root);
+		if (root->value == _value) {
+			// ”далить корень и полностью пересобрать дерево
+		}
+		else return !isEmpty() && root->remove(_value, nullptr);
+	}
+
+	int height() {
+		if (isEmpty())
+			return 0;
+		else return root->height();
 	}
 };
 
