@@ -70,7 +70,19 @@ struct HashTable {
 
 
 HashTable createTable() {
-	HashTable table = HashTable(10);
+	int size;
+	cout << "Input table size ";
+	cin >> size;
+	HashTable table = HashTable(size);
+	int n;
+	cout << "Input number of elements ";
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		int num;
+		cin >> num;
+		table.add(num);
+	}
+	return table;
 }
 
 
