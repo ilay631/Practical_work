@@ -101,19 +101,19 @@ struct TreeNode {
 
 	void NLR() { // Прямой
 		cout << value << " ";
-		left->NLR();
-		right->NLR();
+		if (left) left->NLR();
+		if (right) right->NLR();
 	}
 
 	void LNR() { // Поперечный
-		left->NLR();
+		if (left) left->NLR();
 		cout << value << " ";
-		right->NLR();
+		if (right) right->NLR();
 	}
 
 	void LRN() { // Обратный
-		left->NLR();
-		right->NLR();
+		if (left) left->NLR();
+		if (right) right->NLR();
 		cout << value << " ";
 	}
 };
@@ -161,19 +161,34 @@ struct BinaryTree {
 
 	void NLR() { // Прямой
 		root->NLR();
+		cout << endl;
 	}
 
 	void LNR() { // Поперечный
 		root->LNR();
+		cout << endl;
 	}
 
 	void LRN() { // Обратный
 		root->LRN();
+		cout << endl;
 	}
 };
 
 
 int main() {
+	BinaryTree tree = BinaryTree();
+	for (int i = 0; i < 10; i++) {
+		int m;
+		cin >> m;
+		tree.insert(m);
+	}
+	tree.NLR();
+	tree.LNR();
+	tree.LRN();
+	tree.remove(5);
+	tree.NLR();
+
 
 	return 0;
 }
