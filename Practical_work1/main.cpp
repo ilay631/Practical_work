@@ -65,6 +65,7 @@ struct HashTable {
 				cout << n << " ";
 			}
 		}
+		cout << endl;
 	}
 };
 
@@ -87,5 +88,13 @@ HashTable createTable() {
 
 
 int main() {
+	HashTable myTable = createTable();
+	myTable.print();
+	myTable.add(20);
+	myTable.print();
+	myTable.del(20);
+	myTable.print();
+	cout << myTable.find(5);
 
+	return 0;
 }
