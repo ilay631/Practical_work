@@ -1,5 +1,59 @@
 #include <iostream>
+#include <vector>
 using namespace std;
+
+
+struct QNode {
+	int val;
+	int prior;
+	QNode* next;
+
+	QNode(int _val, int _prior) : val(_val), prior(_prior), next(nullptr) {}
+
+	QNode(int _val, int _prior, QNode* p) : val(_val), prior(_prior), next(p) {}
+};
+
+
+struct PQueue {
+	QNode* start = nullptr;
+
+	void queue_push(int val, int prior) {
+		if (start == nullptr) {
+			start = new QNode(val, prior);
+		}
+		else {
+			QNode* cur = start;
+			bool fl = false;
+			while (cur->next) {
+				if (cur->next->prior > prior) {
+					QNode* t = new QNode(val, prior, cur->next);
+					cur->next = t;
+					fl = true;
+					break;
+				}
+				cur = cur->next;
+			}
+			if (!fl) {
+				QNode* cur = start;
+				while (cur->next) {
+					cur = cur->next;
+				}
+				QNode* t = new QNode(val, prior);
+				cur->next = t;
+			}
+		}
+	}
+
+	void print() {
+		QNode* cur = start;
+		while (cur) {
+			cout << cur->val << " ";
+			cur = cur->next;
+		}
+		cout << endl;
+	}
+};
+
 
 struct TreeNode {
 	int value;
@@ -116,6 +170,12 @@ struct TreeNode {
 		if (right) right->NLR();
 		cout << value << " ";
 	}
+
+	void BFS(PQueue* q, int h = 0) {
+		q->queue_push(value, h);
+		if (left) left->BFS(q, h + 1);
+		if (right) right->BFS(q, h + 1);
+	}
 };
 
 
@@ -173,6 +233,14 @@ struct BinaryTree {
 		root->LRN();
 		cout << endl;
 	}
+
+	void BFS() {
+		PQueue* q = new PQueue();
+		if (!isEmpty()) {
+			root->BFS(q);
+		}
+		q->print();
+	}
 };
 
 
@@ -183,12 +251,7 @@ int main() {
 		cin >> m;
 		tree.insert(m);
 	}
-	tree.NLR();
-	tree.LNR();
-	tree.LRN();
-	tree.remove(5);
-	tree.NLR();
-
+	tree.BFS();
 
 	return 0;
 }
