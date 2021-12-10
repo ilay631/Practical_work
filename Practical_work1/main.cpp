@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 
@@ -244,14 +245,120 @@ struct BinaryTree {
 };
 
 
-int main() {
-	BinaryTree tree = BinaryTree();
-	for (int i = 0; i < 10; i++) {
-		int m;
-		cin >> m;
-		tree.insert(m);
+struct GNode {
+	int id;
+	vector<int> adjacents;
+	vector<int> weights;
+	bool weightsSorted = false;
+	vector<vector<int>> edges;
+
+	void sortWeights() {
+		weightsSorted = true;
+		for (int i = 0; i < weights.size(); i++) {
+			for (int j = i + 1; j < weights.size(); j++) {
+				if (weights[i] > weights[j]) {
+					swap(weights[i], weights[j]);
+					swap(adjacents[i], adjacents[j]);
+				}
+			}
+		}
+		for (int i = 0; i < adjacents.size(); i++) {
+			edges.push_back({ adjacents[i], weights[i] });
+		}
 	}
-	tree.BFS();
+
+	vector<vector<int>>* findMinimumEdge() {
+		if (!weightsSorted)
+			sortWeights();
+		return &edges;
+	}
+
+	void addEdge(int adj, int w) {
+		adjacents.push_back(adj);
+		weights.push_back(w);
+	}
+};
+
+
+struct Graph {
+	vector<GNode> nodes;
+	vector<GNode> tree;
+	vector<vector<int>> edges;
+
+	void PrimaAlgorithm() {
+		if (!nodes.empty()) {
+			tree.push_back(nodes[0]);
+			for (int k = 0; k < nodes.size() - 1; k++) {
+				int m = pow(2, 31) - 1;
+				int sn;
+				int fn;
+				for (int i = 0; i < tree.size(); i++) {
+					vector<vector<int>> edges = *tree[i].findMinimumEdge();
+					for (int j = 0; j < edges.size(); j++) {
+						int an = edges[j][0];
+						int w = edges[j][1];
+						if (!findNode(an)) {
+							if (w < m) {
+								m = w;
+								sn = tree[i].id;
+								fn = an;
+							}
+						}
+					}
+				}
+				tree.push_back(*getNode(fn));
+				edges.push_back({ sn, fn });
+			}
+		}
+	}
+
+	GNode* getNode(int _id) {
+		for (int i = 0; i < nodes.size(); i++) {
+			if (nodes[i].id == _id)
+				return &nodes[i];
+		}
+	}
+
+	bool findNode(int _id) {
+		for (int i = 0; i < tree.size(); i++) {
+			if (tree[i].id == _id)
+				return true;
+		}
+		return false;
+	}
+};
+
+
+Graph* createGraph() {
+	int k;
+	cout << "Input number of nodes" << endl;
+	cin >> k;
+	Graph* g = new Graph;
+	for (int i = 1; i <= k; i++) {
+		GNode* n = new GNode;
+		n->id = i;
+		g->nodes.push_back(*n);
+	}
+	cout << "Input edges (to finish enter 0 0 0)" << endl;
+	int st, en, w;
+	while (1) {
+		cin >> st >> en >> w;
+		if (st == 0 && en == 0 && w == 0)
+			break;
+		g->getNode(st)->addEdge(en, w);
+		g->getNode(en)->addEdge(st, w);
+	}
+	return g;
+}
+
+
+int main() {
+	Graph g = *createGraph();
+	g.PrimaAlgorithm();
+	for (int i = 0; i < g.edges.size(); i++) {
+		cout << g.edges[i][0] << " " << g.edges[i][1] << endl;
+	}
+
 
 	return 0;
 }
