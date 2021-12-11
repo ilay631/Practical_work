@@ -312,6 +312,10 @@ struct Graph {
 		}
 	}
 
+	void KruskalAlgorithm() {
+
+	}
+
 	GNode* getNode(int _id) {
 		for (int i = 0; i < nodes.size(); i++) {
 			if (nodes[i].id == _id)
